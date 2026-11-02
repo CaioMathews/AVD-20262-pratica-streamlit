@@ -2,14 +2,14 @@
 
 **Nome:**  Caio Mathews de Farias Ferreira
 **Data:** 02/11/2026
-**Atividade:** Dashboards em Streamlit — Aulas 21 e 22
+**Atividade:** Dashboards em Streamlit — Aulas 21, 22 e 23
 **Dataset:** EV Battery Failure Dataset
 
 ## Ferramenta
 
 Codex (OpenAI), utilizado no aplicativo Codex para leitura dos materiais, apoio na implementação em Python/Streamlit, elaboração dos rascunhos de layout, documentação e verificação do funcionamento.
 
-A EDA original já possuía uma declaração de uso do Claude (Anthropic), que foi mantida no notebook. Esta declaração registra o apoio do Codex na adaptação dessa EDA para os dashboards e nas implementações das duas etapas de Streamlit.
+A EDA original já possuía uma declaração de uso do Claude (Anthropic), que foi mantida no notebook. Esta declaração registra o apoio do Codex na adaptação dessa EDA para os dashboards e nas implementações das três etapas de Streamlit.
 
 ## Entrega 1 — Aula 21: estrutura do Dashboard 1
 
@@ -95,3 +95,35 @@ Também pedi ajuda para corrigir o texto das justificativas das metricas e organ
 ### Participação e verificação
 
 Solicitei a continuação da atividade, acompanhei as alterações, tirei dúvidas sobre os indicadores e fiz ajustes na documentação. O Codex ajudou na implementação, nos rascunhos, na validação da escrita das justificativas e na verificação dos cálculos e dos filtros. Também conferiu a execução completa da EDA e a interação entre os gráficos. 
+
+## Entrega 3 — Aula 23: publicação e testes da aplicação
+
+### Finalidade do uso
+
+Me orientar na publicação do app no Streamlit Community Cloud e ajudar a conferir as entregas e documentação.
+
+### Prompts usados
+
+> como fazer o deploy
+
+> verifique se está certo os dados do deploy, e me diga se tem alguma sugestão para o deploy
+
+Enviei imagens das configurações de publicação para conferir o repositório, a branch, o arquivo principal e a versão do Python.
+
+
+### Aceito e por quê
+
+- Orientações para publicar o app no Streamlit Community Cloud, usando meu repositório, a branch `main` e o arquivo `app.py`.
+
+- Conferência das configurações do deploy e sugestão de um endereço mais fácil de compartilhar. A aplicação foi publicada em `https://falhas-baterias-caio.streamlit.app/`.
+
+- Testes das duas abas, dos filtros e dos gráficos na versão publicada, para verificar se o app funcionava fora do meu computador.
+
+### Modificado e por quê
+
+- Troquei o endereço automático sugerido pelo Streamlit por `falhas-baterias-caio`, para deixar o link mais simples.
+
+
+### Participação e verificação
+
+Fiz o deploy manualmente, seguindo as orientações, e enviei as configurações e o link para conferência. O Codex verificou o acesso público sem login, a navegação entre as abas, os filtros de ano, marca e tipo de veículo, a seleção simples e múltipla de segmentos e a limpeza da seleção. Também testou situações sem variáveis ou sem veículos selecionados e comparou os indicadores com os dados locais. Os testes da versão publicada não apontaram erros. A inclusão do link no README e esta seção registram a conclusão dessa etapa.
