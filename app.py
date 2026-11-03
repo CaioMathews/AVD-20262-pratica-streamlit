@@ -108,6 +108,9 @@ with tab1:
                 .dropna(subset=["correlacao"])
             )
 
+            ordem = {var: indice for indice, var in enumerate(variaveis)}
+            corr = corr[corr["var_y"].map(ordem) > corr["var_x"].map(ordem)]
+
             if corr.empty:
                 st.warning("A correlação é indefinida: as variáveis selecionadas não variam neste recorte.")
             else:
@@ -116,12 +119,12 @@ with tab1:
                     st.caption("Células de variáveis sem variação ficam vazias.")
 
                 grade = alt.Chart(corr).encode(
-                    x=alt.X("var_x:N", title=None, sort=variaveis, axis=alt.Axis(labelAngle=-30, labelExpr="""
+                    x=alt.X("var_x:N", title=None, sort=variaveis[:-1], axis=alt.Axis(labelAngle=-30, labelExpr="""
                         datum.label === 'manufacturing_year' ? 'Ano' :
                         datum.label === 'battery_capacity_kwh' ? 'Capacidade' : 'Km'
                     """)),
 
-                    y=alt.Y("var_y:N", title=None, sort=variaveis, axis=alt.Axis(labelExpr="""
+                    y=alt.Y("var_y:N", title=None, sort=variaveis[1:], axis=alt.Axis(labelExpr="""
                         datum.label === 'manufacturing_year' ? 'Ano' :
                         datum.label === 'battery_capacity_kwh' ? 'Capacidade' : 'Km'
                     """)),
@@ -239,10 +242,22 @@ with tab2:
 
             with metricas:
                 cards = st.columns(4)
-                cards[0].metric("Veículos analisados", f"{len(selecionado):,}")
-                cards[1].metric("Veículos com falha", f"{selecionado['battery_failure'].mean():.1%}")
-                cards[2].metric("Quilometragem mediana", f"{selecionado['odometer_km'].median():,.0f} km")
-                cards[3].metric("Capacidade mediana", f"{selecionado['battery_capacity_kwh'].median():.1f} kWh")
+                cards[0].metric(
+                    "Veículos analisados", f"{len(selecionado):,}",
+                    help="Quantidade de veículos após os filtros. Escolhida para mostrar o tamanho do grupo que sustenta os demais indicadores.",
+                )
+                cards[1].metric(
+                    "Veículos com falha", f"{selecionado['battery_failure'].mean():.1%}",
+                    help="Porcentagem com battery_failure = 1. Escolhida para comparar a participação das falhas em grupos de tamanhos diferentes.",
+                )
+                cards[2].metric(
+                    "Quilometragem mediana", f"{selecionado['odometer_km'].median():,.0f} km",
+                    help="Valor central de odometer_km. Escolhido por representar o uso do grupo com menor influência dos veículos de quilometragem muito alta.",
+                )
+                cards[3].metric(
+                    "Capacidade mediana", f"{selecionado['battery_capacity_kwh'].median():.1f} kWh",
+                    help="Valor central de battery_capacity_kwh. Escolhido para descrever o perfil de capacidade das baterias do grupo.",
+                )
 
             selecionado = selecionado.copy()
 
